@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "containerUrl": {
+                    "description": "A shared Access Signature (SAS) BLOB container URL to contain the exported data.",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A description of the export task.",
+                    "type": "string"
+                },
+                "endDate": {
+                    "description": "The RFC3339 full-date of the end of the period for which data is exported.",
+                    "format": "date",
+                    "type": "string"
+                },
+                "exportFormat": {
+                    "description": "The format of the exported data.",
+                    "enum": [
+                        "JsonBlob",
+                        "CsvBlob"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "ExportFormat"
+                    }
+                },
+                "startDate": {
+                    "description": "The RFC3339 full-date of the start of the period for which data is exported.",
+                    "format": "date",
+                    "type": "string"
+                }
+            },
+            "readOnly": false,
+            "required": [
+                "containerUrl",
+                "startDate",
+                "endDate",
+                "exportFormat"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

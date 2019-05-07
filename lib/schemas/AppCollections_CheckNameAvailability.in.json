@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "available": {
+                    "description": "Available.",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name.",
+                    "type": "string"
+                },
+                "unavailabilityReason": {
+                    "description": "UnavailabilityReason.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

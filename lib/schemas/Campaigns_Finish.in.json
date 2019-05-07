@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "kind": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "announcements",
+                "polls",
+                "dataPushes",
+                "nativePushes"
+            ]
+        },
+        "id": {
+            "required": true,
+            "type": "integer"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

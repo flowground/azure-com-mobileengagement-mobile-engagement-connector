@@ -1,0 +1,81 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "campaignIds": {
+                    "description": "A list of campaign identifiers.",
+                    "items": {
+                        "format": "long",
+                        "type": "integer"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "campaignType": {
+                    "description": "Campaign type.",
+                    "enum": [
+                        "Announcement",
+                        "DataPush",
+                        "NativePush",
+                        "Poll"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "CampaignType"
+                    }
+                },
+                "containerUrl": {
+                    "description": "A shared Access Signature (SAS) BLOB container URL to contain the exported data.",
+                    "format": "uri",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A description of the export task.",
+                    "type": "string"
+                },
+                "exportFormat": {
+                    "description": "The format of the exported data.",
+                    "enum": [
+                        "JsonBlob",
+                        "CsvBlob"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "ExportFormat"
+                    }
+                }
+            },
+            "readOnly": false,
+            "required": [
+                "containerUrl",
+                "campaignType",
+                "campaignIds",
+                "exportFormat"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,457 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "kind": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "announcements",
+                "polls",
+                "dataPushes",
+                "nativePushes"
+            ]
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "properties": {
+                        "deviceId": {
+                            "description": "Device identifier (as returned by the SDK).",
+                            "type": "string"
+                        },
+                        "lang": {
+                            "description": "The language to test expressed using ISO 639-1 code. The default language of the campaign will be used if the parameter is not provided.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "deviceId"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "properties": {
+                "data": {
+                    "allOf": [
+                        {
+                            "properties": {
+                                "actionButtonText": {
+                                    "description": "Text of the action button for text/web announcements and polls (answer button).",
+                                    "maxLength": 64,
+                                    "type": "string"
+                                },
+                                "actionUrl": {
+                                    "description": "URL to launch when the announcement is actioned.",
+                                    "maxLength": 2000,
+                                    "type": "string"
+                                },
+                                "body": {
+                                    "description": "Body of the text/web announcement, poll or data push. This field supports appInfo markers.",
+                                    "maxLength": 65535,
+                                    "type": "string"
+                                },
+                                "exitButtonText": {
+                                    "description": "Text of the exit button for text/web announcements and polls.",
+                                    "maxLength": 64,
+                                    "type": "string"
+                                },
+                                "notificationImage": {
+                                    "description": "Optional image encoded in base 64. Usually included in the right part of in app notifications (or as a banner if there is neither text nor content icon). For Android system notifications, the image is used as the large icon (displayed only on Android 3+).\n",
+                                    "format": "byte",
+                                    "maxLength": 65535,
+                                    "type": "string"
+                                },
+                                "notificationMessage": {
+                                    "description": "Message of the notification. This field supports appInfo markers.",
+                                    "maxLength": 4000,
+                                    "type": "string"
+                                },
+                                "notificationOptions": {
+                                    "description": "Additional platform specific options.",
+                                    "properties": {
+                                        "actionText": {
+                                            "description": "The action text is the title of the right button of the alert or the value of the unlock slider, where the value replaces 'unlock' in 'slide to unlock'. 'View' (localized to the preferred language) is used as the default value. The `deliveryTime` property must be set to `any` or `background`.\n",
+                                            "type": "string"
+                                        },
+                                        "bigPicture": {
+                                            "description": "URL of a remote image displayed in expanded notifications on\nAndroid 4.1+ devices with the following constraints:\n* The URL length is limited to 2000 characters.\n* The image size must be less than 4 MiB.\n* The following MIME types are supported:\n** image/png\n** image/jpeg\n** image/gif\n** image/webp\n** image/bmp\n** image/x-bmp\n** image/x-ms-bmp\n* URL scheme must be HTTP or HTTPS (with valid SSL certificate).\n* Incompatible with `bigText`, only one of the fields can be set.\n* The `notificationType` property must be set to `system`.\n",
+                                            "maxLength": 2000,
+                                            "type": "string"
+                                        },
+                                        "bigText": {
+                                            "description": "Android 4.1+ only. Multi line message shown in expanded notifications on Android 4.1+ devices. The `notificationType` property must be set to `system`.\n",
+                                            "maxLength": 4000,
+                                            "type": "string"
+                                        },
+                                        "sound": {
+                                            "description": "iOS only. The name of a sound file in the application bundle. The sound in this file is played as an alert. If the sound file doesn’t exist or default is specified as the value, the default alert sound is played. The audio must be in one of the audio data formats that are compatible with system sounds. The `deliveryTime` property must be set to `any` or `background`.\n",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "notificationTitle": {
+                                    "description": "Title of the notification. This field supports appInfo markers.",
+                                    "maxLength": 2000,
+                                    "type": "string"
+                                },
+                                "payload": {
+                                    "description": "Native push payload.",
+                                    "type": "object"
+                                },
+                                "title": {
+                                    "description": "Title of the announcement or poll. This field supports appInfo markers.",
+                                    "maxLength": 128,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    ],
+                    "properties": {
+                        "audience": {
+                            "description": "Specify which users will be targeted by this campaign. By default, all users will be targeted. If you set `pushMode` property to `manual`, the only thing you can specify in the audience is the push quota filter. An audience is a boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Additionally, a set of filters can be added to an audience. 65535 bytes max as per JSON encoding.\n",
+                            "properties": {
+                                "criteria": {
+                                    "additionalProperties": {
+                                        "discriminator": {
+                                            "propertyName": "type"
+                                        },
+                                        "properties": {
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "type"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "description": "Criteria by name.",
+                                    "type": "object"
+                                },
+                                "expression": {
+                                    "description": "Boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Criterion names in the audience expression must start with a capital letter and can only contain alphanumeric (A-Z,a-z,0-9) and underscore (_) characters.\n",
+                                    "type": "string"
+                                },
+                                "filters": {
+                                    "description": "Global filters applied to all devices.",
+                                    "items": {
+                                        "discriminator": {
+                                            "propertyName": "type"
+                                        },
+                                        "properties": {
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "type"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "category": {
+                            "description": "Category of the campaign. Categories can be used on the application side to customize campaigns.",
+                            "maxLength": 64,
+                            "type": "string"
+                        },
+                        "deliveryActivities": {
+                            "description": "Announcements/polls only. Array containing the list of activities in which the campaign can be delivered. deliveryTime must be set to session. If the platform is iOS, this option can also be set if deliveryTime is set to any. In that case, if the campaign is received when the application is launched, it will be delivered only in the specified list of activities.\n",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "deliveryTime": {
+                            "description": "Announcements/polls only. Defines when the campaign should be delivered. Valid values are: * `any`: Campaign will be delivered as soon as possible. * `background`: iOS only. Campaign will be only delivered when the application is in background (out of app). * `session`: Campaign will be delivered when the application is running.\n",
+                            "enum": [
+                                "any",
+                                "background",
+                                "session"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "DeliveryTimes"
+                            }
+                        },
+                        "endTime": {
+                            "description": "The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. Example: `2011-11-21 15:23Z`\n",
+                            "type": "string"
+                        },
+                        "localization": {
+                            "additionalProperties": {
+                                "properties": {
+                                    "actionButtonText": {
+                                        "description": "Text of the action button for text/web announcements and polls (answer button).",
+                                        "maxLength": 64,
+                                        "type": "string"
+                                    },
+                                    "actionUrl": {
+                                        "description": "URL to launch when the announcement is actioned.",
+                                        "maxLength": 2000,
+                                        "type": "string"
+                                    },
+                                    "body": {
+                                        "description": "Body of the text/web announcement, poll or data push. This field supports appInfo markers.",
+                                        "maxLength": 65535,
+                                        "type": "string"
+                                    },
+                                    "exitButtonText": {
+                                        "description": "Text of the exit button for text/web announcements and polls.",
+                                        "maxLength": 64,
+                                        "type": "string"
+                                    },
+                                    "notificationImage": {
+                                        "description": "Optional image encoded in base 64. Usually included in the right part of in app notifications (or as a banner if there is neither text nor content icon). For Android system notifications, the image is used as the large icon (displayed only on Android 3+).\n",
+                                        "format": "byte",
+                                        "maxLength": 65535,
+                                        "type": "string"
+                                    },
+                                    "notificationMessage": {
+                                        "description": "Message of the notification. This field supports appInfo markers.",
+                                        "maxLength": 4000,
+                                        "type": "string"
+                                    },
+                                    "notificationOptions": {
+                                        "description": "Additional platform specific options.",
+                                        "properties": {
+                                            "actionText": {
+                                                "description": "The action text is the title of the right button of the alert or the value of the unlock slider, where the value replaces 'unlock' in 'slide to unlock'. 'View' (localized to the preferred language) is used as the default value. The `deliveryTime` property must be set to `any` or `background`.\n",
+                                                "type": "string"
+                                            },
+                                            "bigPicture": {
+                                                "description": "URL of a remote image displayed in expanded notifications on\nAndroid 4.1+ devices with the following constraints:\n* The URL length is limited to 2000 characters.\n* The image size must be less than 4 MiB.\n* The following MIME types are supported:\n** image/png\n** image/jpeg\n** image/gif\n** image/webp\n** image/bmp\n** image/x-bmp\n** image/x-ms-bmp\n* URL scheme must be HTTP or HTTPS (with valid SSL certificate).\n* Incompatible with `bigText`, only one of the fields can be set.\n* The `notificationType` property must be set to `system`.\n",
+                                                "maxLength": 2000,
+                                                "type": "string"
+                                            },
+                                            "bigText": {
+                                                "description": "Android 4.1+ only. Multi line message shown in expanded notifications on Android 4.1+ devices. The `notificationType` property must be set to `system`.\n",
+                                                "maxLength": 4000,
+                                                "type": "string"
+                                            },
+                                            "sound": {
+                                                "description": "iOS only. The name of a sound file in the application bundle. The sound in this file is played as an alert. If the sound file doesn’t exist or default is specified as the value, the default alert sound is played. The audio must be in one of the audio data formats that are compatible with system sounds. The `deliveryTime` property must be set to `any` or `background`.\n",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "notificationTitle": {
+                                        "description": "Title of the notification. This field supports appInfo markers.",
+                                        "maxLength": 2000,
+                                        "type": "string"
+                                    },
+                                    "payload": {
+                                        "description": "Native push payload.",
+                                        "type": "object"
+                                    },
+                                    "title": {
+                                        "description": "Title of the announcement or poll. This field supports appInfo markers.",
+                                        "maxLength": 128,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "Push campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.\n",
+                            "type": "object"
+                        },
+                        "name": {
+                            "description": "Unique name of the campaign.",
+                            "maxLength": 64,
+                            "type": "string"
+                        },
+                        "notificationBadge": {
+                            "default": false,
+                            "description": "A flag indicating whether or not you want the native Apple Push notification to update the badge icon to the number of unread messages. The `deliveryTime` property must be set to `any` or `background`.\n",
+                            "type": "boolean"
+                        },
+                        "notificationCloseable": {
+                            "default": true,
+                            "description": "A flag indicating whether or not you want the notification to be closeable.",
+                            "type": "boolean"
+                        },
+                        "notificationIcon": {
+                            "default": true,
+                            "description": "A flag indicating whether or not you want to display the resource icon in notification content.",
+                            "type": "boolean"
+                        },
+                        "notificationSound": {
+                            "default": false,
+                            "description": "* `Android`: A flag indicating whether or not you want the system notification to make a sound. The `notificationType` property must be set to `system`. * `iOS`: A flag indicating whether or not you want the native Apple Push notification to make a sound. The `deliveryTime` property must be set to `any` or `background`. This will play the 'default' sound. If you want to play a custom sound, see the `notificationOptions` property. * `Windows`: A flag indicating whether or not you want the native Windows Notification Service to make a sound. The `deliveryTime` property must be set to `any`.\n",
+                            "type": "boolean"
+                        },
+                        "notificationType": {
+                            "default": "popup",
+                            "description": "Android only. Defines how the notification should be displayed. Valid values are: * `system`: Display the notification using a standard system notification. * `popup`: Display the notification using a in-app banner notification.\n",
+                            "enum": [
+                                "system",
+                                "popup"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "NotificationTypes"
+                            }
+                        },
+                        "notificationVibrate": {
+                            "default": false,
+                            "description": "Android only. A flag indicating whether or not you want the system notification to make a vibration. The notificationType property must be set to system.",
+                            "type": "boolean"
+                        },
+                        "pushMode": {
+                            "default": "real-time",
+                            "description": "Announcements/polls only. Defines how the campaign is pushed. Valid values are: * `real-time`: Never ending campaign, the campaign will be delivered  to your existing users and also to your new users. * `one-shot`: In this mode, the campaign will be delivered only to your existing users (campaign will stop after that). * `manual`: In this mode, the campaign will not be pushed automatically to devices. You will have to use the Push campaign command to push the campaign to your end-users. Campaigns can be pushed multiple times to the same device.\n",
+                            "enum": [
+                                "real-time",
+                                "one-shot",
+                                "manual"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "PushModes"
+                            }
+                        },
+                        "questions": {
+                            "description": "Poll questions.",
+                            "items": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "description": "Title of the question.",
+                                                "maxLength": 256,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ],
+                                "properties": {
+                                    "choices": {
+                                        "description": "List of possible choices for this question.",
+                                        "items": {
+                                            "allOf": [
+                                                {
+                                                    "properties": {
+                                                        "title": {
+                                                            "description": "Title of the choice.",
+                                                            "maxLength": 256,
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ],
+                                            "properties": {
+                                                "id": {
+                                                    "description": "Unique identifier of the choice.",
+                                                    "type": "integer"
+                                                },
+                                                "isDefault": {
+                                                    "default": false,
+                                                    "description": "A flag indicating if this choice is the default choice for the associated question. Only one choice in the array can have this value set to true.",
+                                                    "type": "boolean"
+                                                },
+                                                "localization": {
+                                                    "additionalProperties": {
+                                                        "properties": {
+                                                            "title": {
+                                                                "description": "Title of the choice.",
+                                                                "maxLength": 256,
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "description": "Poll choices can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable property title.\n",
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "id": {
+                                        "description": "Unique identifier of the question.",
+                                        "type": "integer"
+                                    },
+                                    "localization": {
+                                        "additionalProperties": {
+                                            "properties": {
+                                                "title": {
+                                                    "description": "Title of the question.",
+                                                    "maxLength": 256,
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "description": "Poll questions can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable property title.\n",
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "startTime": {
+                            "description": "The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`\n",
+                            "type": "string"
+                        },
+                        "timezone": {
+                            "description": "The id of the time zone to use for the startTime and endTime dates. If not provided, the two date attributes will be expressed using the device timezone. Example: America/Los_Angeles\n",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Applicable only to announcements and data pushes. Type of announcement. Valid values are: * `text/plain`: Text-only announcement: `body` property should only contain plain text. * `text/html`: HTML announcement: `body` attribute can contain HTML code. * `only_notif`: Notification-only announcement. With this kind of announcements, the `body`, `title`, `actionButtonText` and `exitButtonText` are ignored. Type of data push. Valid values are: * `text/plain`: Text only data push: `body` property must be plain text. * `text/base64`: Base 64 data push: `body` property must be encoded in base 64.\n",
+                            "enum": [
+                                "text/plain",
+                                "text/html",
+                                "only_notif",
+                                "text/base64"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "CampaignTypes"
+                            }
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

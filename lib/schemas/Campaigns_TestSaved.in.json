@@ -1,0 +1,55 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "kind": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "announcements",
+                "polls",
+                "dataPushes",
+                "nativePushes"
+            ]
+        },
+        "id": {
+            "required": true,
+            "type": "integer"
+        },
+        "requestBody": {
+            "properties": {
+                "deviceId": {
+                    "description": "Device identifier (as returned by the SDK).",
+                    "type": "string"
+                },
+                "lang": {
+                    "description": "The language to test expressed using ISO 639-1 code. The default language of the campaign will be used if the parameter is not provided.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "deviceId"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

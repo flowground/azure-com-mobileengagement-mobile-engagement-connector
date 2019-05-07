@@ -1,0 +1,679 @@
+{
+    "title": "Engagement.ManagementClient",
+    "description": "Microsoft Azure Mobile Engagement REST APIs.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/mobileengagement-mobile-engagement/2014-12-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "AppCollections_List": {
+            "main": "./lib/actions/AppCollections_List.js",
+            "title": "Lists app collections in a subscription.",
+            "description": "Lists app collections in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AppCollections_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AppCollections_CheckNameAvailability": {
+            "main": "./lib/actions/AppCollections_CheckNameAvailability.js",
+            "title": "Checks availability of an app collection name in the Engagement domain.",
+            "description": "Checks availability of an app collection name in the Engagement domain.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AppCollections_CheckNameAvailability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SupportedPlatforms_List": {
+            "main": "./lib/actions/SupportedPlatforms_List.js",
+            "title": "Lists supported platforms for Engagement applications.",
+            "description": "Lists supported platforms for Engagement applications.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SupportedPlatforms_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Apps_List": {
+            "main": "./lib/actions/Apps_List.js",
+            "title": "Lists apps in an appCollection.",
+            "description": "Lists apps in an appCollection.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Apps_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_List": {
+            "main": "./lib/actions/Campaigns_List.js",
+            "title": "Get the list of campaigns.",
+            "description": "Get the list of campaigns.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Create": {
+            "main": "./lib/actions/Campaigns_Create.js",
+            "title": "Create a push campaign (announcement, poll, data push or native push).",
+            "description": "Create a push campaign (announcement, poll, data push or native push).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_TestNew": {
+            "main": "./lib/actions/Campaigns_TestNew.js",
+            "title": "Test a new campaign on a set of devices.",
+            "description": "Test a new campaign on a set of devices.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_TestNew.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Delete": {
+            "main": "./lib/actions/Campaigns_Delete.js",
+            "title": "Delete a campaign previously created by a call to Create campaign.",
+            "description": "Delete a campaign previously created by a call to Create campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Get": {
+            "main": "./lib/actions/Campaigns_Get.js",
+            "title": "The Get campaign operation retrieves information about a previously created campaign.",
+            "description": "The Get campaign operation retrieves information about a previously created campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Update": {
+            "main": "./lib/actions/Campaigns_Update.js",
+            "title": "Update an existing push campaign (announcement, poll, data push or native push).",
+            "description": "Update an existing push campaign (announcement, poll, data push or native push).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Activate": {
+            "main": "./lib/actions/Campaigns_Activate.js",
+            "title": "Activate a campaign previously created by a call to Create campaign.",
+            "description": "Activate a campaign previously created by a call to Create campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Activate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Finish": {
+            "main": "./lib/actions/Campaigns_Finish.js",
+            "title": "Finish a push campaign previously activated by a call to Activate campaign.",
+            "description": "Finish a push campaign previously activated by a call to Activate campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Finish.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Push": {
+            "main": "./lib/actions/Campaigns_Push.js",
+            "title": "Push a previously saved campaign (created with Create campaign) to a set of devices.",
+            "description": "Push a previously saved campaign (created with Create campaign) to a set of devices.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Push.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_GetStatistics": {
+            "main": "./lib/actions/Campaigns_GetStatistics.js",
+            "title": "Get all the campaign statistics.",
+            "description": "Get all the campaign statistics.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_GetStatistics.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_Suspend": {
+            "main": "./lib/actions/Campaigns_Suspend.js",
+            "title": "Suspend a push campaign previously activated by a call to Activate campaign.",
+            "description": "Suspend a push campaign previously activated by a call to Activate campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_Suspend.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_TestSaved": {
+            "main": "./lib/actions/Campaigns_TestSaved.js",
+            "title": "Test an existing campaign (created with Create campaign) on a set of devices.",
+            "description": "Test an existing campaign (created with Create campaign) on a set of devices.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_TestSaved.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Campaigns_GetByName": {
+            "main": "./lib/actions/Campaigns_GetByName.js",
+            "title": "The Get campaign operation retrieves information about a previously created campaign.",
+            "description": "The Get campaign operation retrieves information about a previously created campaign.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Campaigns_GetByName.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Devices_List": {
+            "main": "./lib/actions/Devices_List.js",
+            "title": "Query the information associated to the devices running an application.",
+            "description": "Query the information associated to the devices running an application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Devices_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_List": {
+            "main": "./lib/actions/ExportTasks_List.js",
+            "title": "Get the list of export tasks.",
+            "description": "Get the list of export tasks.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateActivitiesTask": {
+            "main": "./lib/actions/ExportTasks_CreateActivitiesTask.js",
+            "title": "Creates a task to export activities.",
+            "description": "Creates a task to export activities.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateActivitiesTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateCrashesTask": {
+            "main": "./lib/actions/ExportTasks_CreateCrashesTask.js",
+            "title": "Creates a task to export crashes.",
+            "description": "Creates a task to export crashes.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateCrashesTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateErrorsTask": {
+            "main": "./lib/actions/ExportTasks_CreateErrorsTask.js",
+            "title": "Creates a task to export errors.",
+            "description": "Creates a task to export errors.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateErrorsTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateEventsTask": {
+            "main": "./lib/actions/ExportTasks_CreateEventsTask.js",
+            "title": "Creates a task to export events.",
+            "description": "Creates a task to export events.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateEventsTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateFeedbackTaskByCampaign": {
+            "main": "./lib/actions/ExportTasks_CreateFeedbackTaskByCampaign.js",
+            "title": "Creates a task to export push campaign data for a set of campaigns.",
+            "description": "Creates a task to export push campaign data for a set of campaigns.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateFeedbackTaskByCampaign.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateFeedbackTaskByDateRange": {
+            "main": "./lib/actions/ExportTasks_CreateFeedbackTaskByDateRange.js",
+            "title": "Creates a task to export push campaign data for a date range.",
+            "description": "Creates a task to export push campaign data for a date range.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateFeedbackTaskByDateRange.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateJobsTask": {
+            "main": "./lib/actions/ExportTasks_CreateJobsTask.js",
+            "title": "Creates a task to export jobs.",
+            "description": "Creates a task to export jobs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateJobsTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateSessionsTask": {
+            "main": "./lib/actions/ExportTasks_CreateSessionsTask.js",
+            "title": "Creates a task to export sessions.",
+            "description": "Creates a task to export sessions.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateSessionsTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateTagsTask": {
+            "main": "./lib/actions/ExportTasks_CreateTagsTask.js",
+            "title": "Creates a task to export tags.",
+            "description": "Creates a task to export tags.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateTagsTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_CreateTokensTask": {
+            "main": "./lib/actions/ExportTasks_CreateTokensTask.js",
+            "title": "Creates a task to export tags.",
+            "description": "Creates a task to export tags.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_CreateTokensTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportTasks_Get": {
+            "main": "./lib/actions/ExportTasks_Get.js",
+            "title": "Retrieves information about a previously created export task.",
+            "description": "Retrieves information about a previously created export task.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportTasks_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ImportTasks_List": {
+            "main": "./lib/actions/ImportTasks_List.js",
+            "title": "Get the list of import jobs.",
+            "description": "Get the list of import jobs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ImportTasks_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ImportTasks_Create": {
+            "main": "./lib/actions/ImportTasks_Create.js",
+            "title": "Creates a job to import the specified data to a storageUrl.",
+            "description": "Creates a job to import the specified data to a storageUrl.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ImportTasks_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ImportTasks_Get": {
+            "main": "./lib/actions/ImportTasks_Get.js",
+            "title": "The Get import job operation retrieves information about a previously created import job.",
+            "description": "The Get import job operation retrieves information about a previously created import job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ImportTasks_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Devices_TagByDeviceId": {
+            "main": "./lib/actions/Devices_TagByDeviceId.js",
+            "title": "Update the tags registered for a set of devices running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+            "description": "Update the tags registered for a set of devices running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Devices_TagByDeviceId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Devices_GetByDeviceId": {
+            "main": "./lib/actions/Devices_GetByDeviceId.js",
+            "title": "Get the information associated to a device running an application.",
+            "description": "Get the information associated to a device running an application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Devices_GetByDeviceId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Devices_TagByUserId": {
+            "main": "./lib/actions/Devices_TagByUserId.js",
+            "title": "Update the tags registered for a set of users running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+            "description": "Update the tags registered for a set of users running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Devices_TagByUserId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Devices_GetByUserId": {
+            "main": "./lib/actions/Devices_GetByUserId.js",
+            "title": "Get the information associated to a device running an application using the user identifier.",
+            "description": "Get the information associated to a device running an application using the user identifier.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Devices_GetByUserId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

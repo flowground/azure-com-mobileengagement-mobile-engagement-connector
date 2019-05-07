@@ -1,0 +1,31 @@
+{
+    "type": "object",
+    "properties": {
+        "kind": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "announcements",
+                "polls",
+                "dataPushes",
+                "nativePushes"
+            ]
+        },
+        "id": {
+            "required": true,
+            "type": "integer"
+        },
+        "appCollection": {
+            "required": true,
+            "type": "string"
+        },
+        "appName": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
